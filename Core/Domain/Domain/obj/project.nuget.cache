@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9qhvZ5FnfN/gY313MERPeh8IAWIGWTYG+3myIaI+8UhKhnY8xf9kcqfduLmuLiWrUUYRQvekDvqt7kK7ILuHgA==",
+  "dgSpecHash": "TBmx0WRTI69x3rv56/t/BYyP6hmCVLhONlT5jIXO8DjJCC1H1Aig/Q3g/jmONSmSzFXXFqXGIbXiEH7CYyoGLQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nikodim\\Desktop\\Job\\HealthyHole\\Core\\Domain\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\nikodim\\Desktop\\Job\\HealthyHole\\Core\\Domain\\Domain\\HealthyHole.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

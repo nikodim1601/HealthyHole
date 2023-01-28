@@ -11,7 +11,7 @@ namespace Domain
     /// </summary>
     public class FactoryChange
     {
-        private Guid _id;
+        private Guid _id = Guid.NewGuid();
         private DateTime _startTime;
         private DateTime _finishTime;
         private int _workedHours;
@@ -24,9 +24,9 @@ namespace Domain
         public int WorkedHours { get => _workedHours; }
         public Employee Employee { get => _employee; }
 
-        public FactoryChange(Employee employee)
-        {
-            _employee = employee ?? throw new ArgumentNullException(nameof(employee));
-        }
+        //public FactoryChange(Employee employee)
+        //{
+        //    _employee = employee ?? throw new ArgumentNullException(nameof(employee));
+        //}
     }
 }

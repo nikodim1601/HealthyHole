@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    /// <summary>
-    /// Представляет класс "Должности".
-    /// </summary>
-    public static class Position
+    public class Constants
     {
+        /// <summary>
+        /// Должности.
+        /// </summary>
         public enum Posistions
         {
             Manager,
             Engeneer,
             TesterOfCumdle,
         }
-
     }
 }

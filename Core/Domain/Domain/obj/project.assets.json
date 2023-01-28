@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nikodim\\Desktop\\Job\\HealthyHole\\Core\\Domain\\Domain\\Domain.csproj",
-      "projectName": "Domain",
-      "projectPath": "C:\\Users\\nikodim\\Desktop\\Job\\HealthyHole\\Core\\Domain\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\nikodim\\Desktop\\Job\\HealthyHole\\Core\\Domain\\Domain\\HealthyHole.Domain.csproj",
+      "projectName": "HealthyHole.Domain",
+      "projectPath": "C:\\Users\\nikodim\\Desktop\\Job\\HealthyHole\\Core\\Domain\\Domain\\HealthyHole.Domain.csproj",
       "packagesPath": "C:\\Users\\nikodim\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\nikodim\\Desktop\\Job\\HealthyHole\\Core\\Domain\\Domain\\obj\\",
       "projectStyle": "PackageReference",

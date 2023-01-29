@@ -11,22 +11,12 @@ namespace HealthyHole.Application.Queries
 {
     public class EmploeeDTO : IMapWith<Employee>
     {
-        public Guid EmploeeId { get; }
-        public string SecondName { get; }
-        public string FirstName { get; }
-        public string SureName { get; }
-        public Constants.Posistions Position { get; }
-        public FactoryChange[] FactoryChanges { get; }
-
-        EmploeeDTO(Guid emploeeId, string secondName, string firstName, string sureName, Constants.Posistions position, FactoryChange[] factoryChanges)
-        {
-            EmploeeId = emploeeId;
-            SecondName = secondName;
-            FirstName = firstName;
-            SureName = sureName;
-            Position = position;
-            FactoryChanges = factoryChanges;
-        }
+        public Guid EmploeeId { get; private set; }
+        public string SecondName { get; private set; }
+        public string FirstName { get; private set; }
+        public string SureName { get; private set; }
+        public Constants.Posistions Position { get; private set; }
+        public FactoryChange[] FactoryChanges { get; private set; }
 
         public void Mapping(Profile profile)
         {

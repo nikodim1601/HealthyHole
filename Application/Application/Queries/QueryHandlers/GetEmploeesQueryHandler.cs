@@ -28,6 +28,10 @@ namespace HealthyHole.Application.Queries.QueryHandlers
 
         public async Task<EmploeesList> Handle(GetEmploeesQuery request, CancellationToken cancellationToken)
         {
+            if (_dbContext.Employees == null)
+            {
+                return new EmploeesList(new List<EmploeeDTO>());
+            }
             var emploees = await _dbContext.Employees
                 .ProjectTo<EmploeeDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();

@@ -8,31 +8,20 @@ namespace HealthyHole.WebAPI.Models
 {
     public class UpdateEmploeeDTO : IMapWith<UpdateEmploeeDTO>
     {
-        public Guid EmploeeId { get; }
-        public string SecondName { get; }
-        public string FirstName { get; }
-        public string SureName { get; }
-        public Constants.Posistions Position { get; }
-        public FactoryChange[] FactoryChanges { get; }
-
-        UpdateEmploeeDTO(Guid emploeeId, string secondName, string firstName, string sureName, Constants.Posistions position, FactoryChange[] factoryChanges)
-        {
-            EmploeeId = emploeeId;
-            SecondName = secondName;
-            FirstName = firstName;
-            SureName = sureName;
-            Position = position;
-            FactoryChanges = factoryChanges;
-        }
+        public Guid EmploeeId { get; set; }
+        public string SecondName { get; set; }
+        public string FirstName { get; set; }
+        public string SureName { get; set; }
+        public Constants.Posistions Position { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<UpdateEmploeeDTO, UpdateEmploeeCommand>().ForMember(emploeeDTO => emploeeDTO.EmploeeId, opt => opt.MapFrom(emploee => emploee.EmploeeId))
-                .ForMember(emploeeDTO => emploeeDTO.SecondName, opt => opt.MapFrom(emploee => emploee.SecondName))
-                .ForMember(emploeeDTO => emploeeDTO.FirstName, opt => opt.MapFrom(emploee => emploee.FirstName))
-                .ForMember(emploeeDTO => emploeeDTO.SureName, opt => opt.MapFrom(emploee => emploee.SureName))
-                .ForMember(emploeeDTO => emploeeDTO.Position, opt => opt.MapFrom(emploee => emploee.Position))
-                .ForMember(emploeeDTO => emploeeDTO.FactoryChanges, opt => opt.MapFrom(emploee => emploee.FactoryChanges));
+            profile.CreateMap<UpdateEmploeeDTO, UpdateEmployeeCommand>().ForMember(employeeDTO => employeeDTO.EmploeeId,
+                    opt => opt.MapFrom(employee => employee.EmploeeId))
+                .ForMember(employeeDTO => employeeDTO.SecondName, opt => opt.MapFrom(employee => employee.SecondName))
+                .ForMember(employeeDTO => employeeDTO.FirstName, opt => opt.MapFrom(employee => employee.FirstName))
+                .ForMember(employeeDTO => employeeDTO.SureName, opt => opt.MapFrom(employee => employee.SureName))
+                .ForMember(employeeDTO => employeeDTO.Position, opt => opt.MapFrom(employee => employee.Position));
         }
     }
 }

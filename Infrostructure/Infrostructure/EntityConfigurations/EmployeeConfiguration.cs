@@ -14,9 +14,10 @@ namespace Infrastructure.EntityConfigurations
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
             // Определяет что является ключем записи.
-            builder.HasKey(factoryChange => factoryChange.Id);
+            builder.HasKey(employee =>  employee.Id);
             // Определяет что EmploeeId сущности должен быть уникальным.
-            builder.HasIndex(factoryChange => factoryChange.Id).IsUnique();
+            builder.HasIndex(employee => employee.Id).IsUnique();
+            
         }
     }
 }

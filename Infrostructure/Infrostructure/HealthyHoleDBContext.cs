@@ -12,8 +12,8 @@ namespace Infrastructure
 {
     public class HealthyHoleDBContext : DbContext, IHealthyHoleDBContext
     {
-        public DbSet<Employee> Employees { get; }
-        public DbSet<FactoryChange> FactoryChanges { get; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<FactoryChange> FactoryChanges { get; set; }
 
         public HealthyHoleDBContext(DbContextOptions<HealthyHoleDBContext> options) : base(options) { }
 

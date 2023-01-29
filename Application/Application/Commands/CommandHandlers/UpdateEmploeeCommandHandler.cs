@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HealthyHole.Application.CommandHandlers
 {
-    internal class UpdateEmploeeCommandHandler : IRequestHandler<UpdateEmploeeCommand, Guid>
+    internal class UpdateEmploeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, Guid>
     {
         private readonly IHealthyHoleDBContext _dbContext;
 
@@ -21,7 +21,7 @@ namespace HealthyHole.Application.CommandHandlers
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<Guid> Handle(UpdateEmploeeCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var emploee = await _dbContext.Employees.FirstOrDefaultAsync(emploee => emploee.Id == request.EmploeeId, cancellationToken);
 

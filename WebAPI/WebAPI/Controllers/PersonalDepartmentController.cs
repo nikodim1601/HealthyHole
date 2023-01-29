@@ -6,6 +6,8 @@ using HealthyHole.WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using WebAPI;
 
 namespace HealthyHole.WebAPI.Controllers
 {
@@ -22,33 +24,53 @@ namespace HealthyHole.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<EmploeesList>> GetAll()
         {
-            var query = new GetEmploeesQuery();
-            var vm = await Mediator.Send(query);
-            return Ok(vm);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult> Get(Guid id)
-        {
-            return Created("", 1);
+            try
+            {
+                var query = new GetEmploeesQuery();
+                var vm = await Mediator.Send(query);
+                return Ok(vm);       
+            }
+            catch (Exception e)
+            {
+                // Тут должны быть человеческие логи...
+                Console.WriteLine(e);
+                return BadRequest(CONSTANTS.BAD_REQUEST_MESSAGE);
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreateEmploeeDTO createEmploeeDTO)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateEmploeeDTO createEmployeeDTO)
         {
-            var command = _mapper.Map<CreateEmploeeCommand>(createEmploeeDTO);
-            var emploeeId = await Mediator.Send(command);
+            try
+            {
+                var command = _mapper.Map<CreateEmployeeCommand>(createEmployeeDTO);
+                var employee = await Mediator.Send(command);
 
-            return Ok(emploeeId);
+                return Ok(employee);    
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(CONSTANTS.BAD_REQUEST_MESSAGE);
+            }
         }
 
         [HttpPut]
-        public async Task<ActionResult<Guid>> Update([FromBody] UpdateEmploeeDTO updateEmploeeDTO)
+        public async Task<ActionResult<Guid>> Update([FromBody] UpdateEmploeeDTO updateEmployeeDTO)
         {
-            var command = _mapper.Map<UpdateEmploeeCommand>(updateEmploeeDTO);
-            var emploeeId = await Mediator.Send(command);
+            try
+            {
+                var command = _mapper.Map<UpdateEmployeeCommand>(updateEmployeeDTO);
+            
+                var employee = await Mediator.Send(command);
 
-            return Ok(emploeeId);
+                return Ok(employee);   
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(CONSTANTS.BAD_REQUEST_MESSAGE);
+            }
         }
 
         [HttpDelete("{id}")]

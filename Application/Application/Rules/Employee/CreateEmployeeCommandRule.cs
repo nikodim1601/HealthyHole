@@ -12,7 +12,7 @@ namespace HealthyHole.Application.Rules.Employee
         {
             RuleFor(command => command.FirstName).NotEmpty();
             RuleFor(command => command.SecondName).NotEmpty();
-            RuleFor(command => command.Position).NotNull();
+            RuleFor(command => command.Position).NotNull().IsInEnum();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace HealthyHole.Application.Queries
         public string SecondName { get; private set; }
         public string FirstName { get; private set; }
         public string SureName { get; private set; }
-        public Constants.Posistions Position { get; private set; }
+        public Constants.Positions Position { get; private set; }
         public FactoryChange[] FactoryChanges { get; private set; }
 
         public void Mapping(Profile profile)

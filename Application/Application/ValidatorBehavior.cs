@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
 namespace HealthyHole.Application
@@ -27,10 +28,22 @@ namespace HealthyHole.Application
                 .ToList();
             if (failures.Count != 0)
             {
-                throw new ValidationException(CONSTANTS.VALIDATOR_EXEPTION_MESSAGE, failures);
+                throw new ValidationException(GetErrorMessage(failures), failures);
             }
 
             return next();
+        }
+
+        private string GetErrorMessage(List<ValidationFailure> failures)
+        {
+            var message = CONSTANTS.VALIDATOR_EXEPTION_MESSAGE;
+
+            foreach (var validationFailure in failures)
+            {
+                message += $"\n {validationFailure.ErrorMessage}";
+            }
+
+            return message;
         }
     }
 }

@@ -12,11 +12,11 @@ namespace HealthyHole.WebAPI.Models
         public string SecondName { get; set; }
         public string FirstName { get; set; }
         public string SureName { get; set; }
-        public Constants.Posistions Position { get; set; }
+        public Constants.Positions Position { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<UpdateEmploeeDTO, UpdateEmployeeCommand>().ForMember(employeeDTO => employeeDTO.EmploeeId,
+            profile.CreateMap<UpdateEmploeeDTO, UpdateEmployeeCommand>().ForMember(employeeDTO => employeeDTO.EmployeeId,
                     opt => opt.MapFrom(employee => employee.EmploeeId))
                 .ForMember(employeeDTO => employeeDTO.SecondName, opt => opt.MapFrom(employee => employee.SecondName))
                 .ForMember(employeeDTO => employeeDTO.FirstName, opt => opt.MapFrom(employee => employee.FirstName))

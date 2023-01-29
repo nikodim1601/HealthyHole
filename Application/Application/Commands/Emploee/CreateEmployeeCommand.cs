@@ -10,7 +10,7 @@ namespace HealthyHole.Application.Commands.Emploee
         public string SecondName { get; set; }
         public string FirstName { get; set; }
         public string SureName { get; set; }
-        public Constants.Posistions Position { get; set; }
+        public Constants.Positions Position { get; set; }
 
         CreateEmployeeCommand()
         {

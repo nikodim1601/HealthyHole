@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HealthyHole.Application.CommandHandlers
 {
-    internal class DeleteEmploeeCommandHandler : IRequestHandler<DeleteEmploeeCommand, Guid>
+    internal class DeleteEmploeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, Guid>
     {
         private readonly IHealthyHoleDBContext _dbContext;
 
@@ -20,7 +20,7 @@ namespace HealthyHole.Application.CommandHandlers
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<Guid> Handle(DeleteEmploeeCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
             var emploee = await _dbContext.Employees.FirstOrDefaultAsync(emploee => emploee.Id == request.EmploeeId);
 

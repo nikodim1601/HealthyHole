@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain;
 
 namespace HealthyHole.Application.Queries
 {
-    public class GetEmploeesQuery : IRequest<EmploeesList>
+    public class GetEmployeesQuery : IRequest<EmploeesList>
     {
+        public Constants.Positions? Positions { get; set; }
     }
 }

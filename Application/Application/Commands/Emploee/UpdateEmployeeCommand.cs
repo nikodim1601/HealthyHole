@@ -8,23 +8,12 @@ using System.Threading.Tasks;
 
 namespace HealthyHole.Application.Commands.Emploee
 {
-    public class UpdateEmployeeCommand : IRequest<Guid>
+    public class UpdateEmployeeCommand : IRequest<Employee>
     {
-        public Guid EmploeeId { get; set; }
-        public string SecondName { get; private set; }
-        public string FirstName { get; private set; }
-        public string SureName { get; private set; }
-        public Constants.Posistions Position { get; private set; }
-        public FactoryChange[] FactoryChanges { get; private set; }
-
-        UpdateEmployeeCommand(Guid emploeeId, string secondName, string firstName, string sureName, Constants.Posistions position, FactoryChange[] factoryChanges)
-        {
-            EmploeeId = emploeeId;
-            SecondName = secondName;
-            FirstName = firstName;
-            SureName = sureName;
-            Position = position;
-            FactoryChanges = factoryChanges;
-        }
+        public Guid EmployeeId { get; set; }
+        public string SecondName { get; set; }
+        public string FirstName { get; set; }
+        public string SureName { get; set; }
+        public Constants.Positions Position { get; set; }
     }
 }

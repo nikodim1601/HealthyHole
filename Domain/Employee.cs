@@ -19,8 +19,8 @@ namespace Domain
 
         public string SureName { get; set; }
 
-        public Constants.Posistions Position { get; set; }
+        public Constants.Positions Position { get; set; }
 
-        public FactoryChange[] FactoryChanges { get; set; }
+        public IReadOnlyList<FactoryChange> FactoryChanges { get; set; } = new List<FactoryChange>();
     }
 }

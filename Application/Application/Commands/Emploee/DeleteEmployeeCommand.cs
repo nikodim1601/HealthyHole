@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HealthyHole.Application.Commands.Emploee
 {
-    public class DeleteEmploeeCommand : IRequest<Guid>
+    public class DeleteEmployeeCommand : IRequest<Guid>
     {
         public Guid EmploeeId { get; }
 
-        public DeleteEmploeeCommand(Guid emploeeId)
+        public DeleteEmployeeCommand(Guid emploeeId)
         {
             EmploeeId = emploeeId;
         }

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace HealthyHole.Application.Queries.QueryHandlers
 {
-    internal class GetEmploeesQueryHandler : IRequestHandler<GetEmploeesQuery, EmploeesList>
+    internal class GetEmploeesQueryHandler : IRequestHandler<GetEmployeesQuery, EmploeesList>
     {
         private readonly IHealthyHoleDBContext _dbContext;
         private readonly IMapper _mapper;
@@ -26,17 +26,24 @@ namespace HealthyHole.Application.Queries.QueryHandlers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<EmploeesList> Handle(GetEmploeesQuery request, CancellationToken cancellationToken)
+        public async Task<EmploeesList> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
         {
-            if (_dbContext.Employees == null)
+            List<EmploeeDTO> employees;
+            
+            if (request.Positions is not null)
             {
-                return new EmploeesList(new List<EmploeeDTO>());
+                employees = await _dbContext.Employees.Where(employee => employee.Position == request.Positions)
+                    .ProjectTo<EmploeeDTO>(_mapper.ConfigurationProvider)
+                    .ToListAsync(cancellationToken: cancellationToken);
             }
-            var emploees = await _dbContext.Employees
-                .ProjectTo<EmploeeDTO>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            else
+            {
+                employees = await _dbContext.Employees
+                    .ProjectTo<EmploeeDTO>(_mapper.ConfigurationProvider)
+                    .ToListAsync(cancellationToken: cancellationToken);
+            }
 
-            return new EmploeesList(emploees);
+            return new EmploeesList(employees);
         }
     }
 }

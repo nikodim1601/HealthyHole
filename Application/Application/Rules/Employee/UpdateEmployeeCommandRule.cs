@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain;
 using FluentValidation;
 using HealthyHole.Application.Commands.Emploee;
 
@@ -11,10 +12,10 @@ namespace HealthyHole.Application.Rules.Employee
     {
         public UpdateEmployeeCommandRule()
         {
-            RuleFor(command => command.EmploeeId).NotEmpty().NotEqual(Guid.Empty);
+            RuleFor(command => command.EmployeeId).NotEmpty().NotEqual(Guid.Empty);
             RuleFor(command => command.FirstName).NotEmpty();
             RuleFor(command => command.SecondName).NotEmpty();
-            RuleFor(command => command.Position).NotNull();
+            RuleFor(command => command.Position).NotNull().IsInEnum();
         }
     }
 }

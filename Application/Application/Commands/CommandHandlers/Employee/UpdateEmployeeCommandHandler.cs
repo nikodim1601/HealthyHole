@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthyHole.Application.Exceptions;
 
 namespace HealthyHole.Application.CommandHandlers
 {
@@ -27,14 +28,10 @@ namespace HealthyHole.Application.CommandHandlers
 
             if (employee == null)
             {
-                throw new NullReferenceException($"Заводчага {request.FirstName} {request.SecondName} с позывным {request.EmployeeId} не обнаружен.");
+                throw new EmployeeNotFoundException($"Заводчага {request.FirstName} {request.SecondName} с позывным {request.EmployeeId} не обнаружен.");
             }
-
-            employee.FirstName = request.FirstName;
-            employee.SecondName = request.SecondName;
-            employee.SureName = request.SureName;
-            employee.Position = request.Position;
-
+            
+            employee.UpdateEmployee(request.FirstName, request.SecondName, request.SureName, request.Position);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return employee;

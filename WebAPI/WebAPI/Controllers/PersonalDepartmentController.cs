@@ -4,14 +4,9 @@ using HealthyHole.Application.Queries.Models;
 using HealthyHole.WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Domain;
 using HealthyHole.Application.Queries;
-using Microsoft.OpenApi.Extensions;
-using Newtonsoft.Json;
-using WebAPI;
 
 namespace HealthyHole.WebAPI.Controllers
 {

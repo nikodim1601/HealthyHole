@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using HealthyHole.Application.Queries;
 
-namespace HealthyHole.Application.Rules.Employee
+namespace HealthyHole.Application.Validation.Employee
 {
     /// <summary>
     /// Определяет запрос получения сотруднков.

@@ -8,25 +8,26 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthyHole.Application.Exceptions;
 
 namespace HealthyHole.Application.CommandHandlers
 {
-    internal class DeleteEmploeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, Guid>
+    internal class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, Guid>
     {
         private readonly IHealthyHoleDBContext _dbContext;
 
-        public DeleteEmploeeCommandHandler(IHealthyHoleDBContext dbContext)
+        public DeleteEmployeeCommandHandler(IHealthyHoleDBContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public async Task<Guid> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var emploee = await _dbContext.Employees.FirstOrDefaultAsync(emploee => emploee.Id == request.EmploeeId);
+            var emploee = await _dbContext.Employees.FirstOrDefaultAsync(emploee => emploee.Id == request.EmployeeId);
 
             if (emploee == null)
             {
-                throw new NullReferenceException($"Заводчага с позывным {request.EmploeeId} не обнаружен.");
+                throw new EmployeeNotFoundException($"Заводчага с позывным {request.EmployeeId} не обнаружен.");
             }
 
             _dbContext.Employees.Remove(emploee);

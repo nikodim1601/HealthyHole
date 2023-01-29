@@ -16,7 +16,7 @@ namespace HealthyHole.Application.Queries
         public string FirstName { get; private set; }
         public string SureName { get; private set; }
         public Constants.Positions Position { get; private set; }
-        public FactoryChange[] FactoryChanges { get; private set; }
+        public FactoryShift[] FactoryChanges { get; private set; }
 
         public void Mapping(Profile profile)
         {
@@ -25,7 +25,7 @@ namespace HealthyHole.Application.Queries
                 .ForMember(emploeeDTO => emploeeDTO.FirstName, opt => opt.MapFrom(emploee => emploee.FirstName))
                 .ForMember(emploeeDTO => emploeeDTO.SureName, opt => opt.MapFrom(emploee => emploee.SureName))
                 .ForMember(emploeeDTO => emploeeDTO.Position, opt => opt.MapFrom(emploee => emploee.Position))
-                .ForMember(emploeeDTO => emploeeDTO.FactoryChanges, opt => opt.MapFrom(emploee => emploee.FactoryChanges));
+                .ForMember(emploeeDTO => emploeeDTO.FactoryChanges, opt => opt.MapFrom(emploee => emploee.FactoryShift));
         }
     }
 }

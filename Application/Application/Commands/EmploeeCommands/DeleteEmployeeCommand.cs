@@ -10,11 +10,11 @@ namespace HealthyHole.Application.Commands.Emploee
 {
     public class DeleteEmployeeCommand : IRequest<Guid>
     {
-        public Guid EmploeeId { get; }
+        public Guid EmployeeId { get; }
 
-        public DeleteEmployeeCommand(Guid emploeeId)
+        public DeleteEmployeeCommand(Guid employeeId)
         {
-            EmploeeId = emploeeId;
+            EmployeeId = employeeId;
         }
     }
 }

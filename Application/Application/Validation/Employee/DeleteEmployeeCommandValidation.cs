@@ -11,7 +11,7 @@ namespace HealthyHole.Application.Rules.Employee
     {
         public DeleteEmployeeCommandRule()
         {
-            RuleFor(command => command.EmploeeId).NotEmpty().NotEqual(Guid.Empty);
+            RuleFor(command => command.EmployeeId).NotEmpty().NotEqual(Guid.Empty);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Application
     public interface IHealthyHoleDBContext
     {
         DbSet<Employee> Employees { get; }
-        DbSet<FactoryChange> FactoryChanges { get; }
+        DbSet<FactoryShift> FactoryChanges { get; }
 
         /// <summary>
         /// Сохраняет изменение контекста в DB. 

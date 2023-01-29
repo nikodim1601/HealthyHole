@@ -3,6 +3,7 @@ using Domain;
 using HealthyHole.Application.Commands.Emploee;
 using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,6 +27,7 @@ namespace HealthyHole.Application.CommandHandlers
                 SecondName = request.SecondName,
                 SureName = request.SureName,
                 Position = request.Position,
+                FactoryShift = new List<FactoryShift>()
             };
 
             await _dbContext.Employees.AddAsync(employee, cancellationToken);

@@ -11,16 +11,55 @@ namespace Domain
     /// </summary>
     public class Employee
     {
-        public Guid Id { get; set; }
+        private Guid _id;
+        private string _secondName;
+        private string _firstName;
+        private string _sureName;
+        private Constants.Positions _position;
+        private IReadOnlyList<FactoryShift> _factoryShift;
 
-        public string SecondName { get; set; }
+        public Guid Id
+        {
+            get;
+            init;
+        }
 
-        public string FirstName { get; set; }
+        public string SecondName
+        {
+            get => _secondName;
+            init => _secondName = value;
+        }
 
-        public string SureName { get; set; }
+        public string FirstName
+        {
+            get => _firstName;
+            init => _firstName = value;
+        }
 
-        public Constants.Positions Position { get; set; }
+        public string SureName
+        {
+            get => _sureName;
+            init => _sureName = value;
+        }
 
-        public IReadOnlyList<FactoryChange> FactoryChanges { get; set; } = new List<FactoryChange>();
+        public Constants.Positions Position
+        {
+            get => _position;
+            init => _position = value;
+        }
+
+        public IReadOnlyList<FactoryShift> FactoryShift
+        {
+            get => _factoryShift;
+            init => _factoryShift = value;
+        }
+
+        public void UpdateEmployee(string firstName, string secondName, string sureName, Constants.Positions positions)
+        {
+            _firstName = firstName;
+            _secondName = secondName;
+            _sureName = sureName;
+            _position = positions;
+        }
     }
 }

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace Infrastructure.EntityConfigurations
 {
     /// <summary>
-    /// Настраивает сущность <see cref="FactoryChange" />.
+    /// Настраивает сущность <see cref="FactoryShift" />.
     /// </summary>
-    internal class FactoryChangeConfiguration : IEntityTypeConfiguration<FactoryChange>
+    internal class FactoryChangeConfiguration : IEntityTypeConfiguration<FactoryShift>
     {
-        public void Configure(EntityTypeBuilder<FactoryChange> builder)
+        public void Configure(EntityTypeBuilder<FactoryShift> builder)
         {
             // Определяет что является ключем записи.
             builder.HasKey(factoryChange => factoryChange.Id);

@@ -1,7 +1,7 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace HealthyHole.WebAPI.Controllers
 {
@@ -10,6 +10,9 @@ namespace HealthyHole.WebAPI.Controllers
     public abstract class BaseController : ControllerBase
     {
         private IMediator _mediator;
-        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        private IMapper _mapper;
+        protected IMediator Mediator => _mediator = _mediator ?? HttpContext.RequestServices.GetService<IMediator>();
+
+        protected IMapper Mapper => _mapper = _mapper ?? HttpContext.RequestServices.GetService<IMapper>();
     }
 }

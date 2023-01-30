@@ -1,10 +1,10 @@
 using HealthyHole.Dal;
-using Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebAPI;
 
-namespace WebAPI
+namespace HealthyHole.WebAPI
 {
     public class Program
     {
@@ -14,7 +14,7 @@ namespace WebAPI
 
             var scope = host.Services.CreateScope();
             var serviceProvider = scope.ServiceProvider;
-            var context = serviceProvider.GetRequiredService<HealthyHoleDBContext>();
+            var context = serviceProvider.GetRequiredService<HealthyHoleDbContext>();
             DbInitializer.Initialize(context);
 
             host.Run();

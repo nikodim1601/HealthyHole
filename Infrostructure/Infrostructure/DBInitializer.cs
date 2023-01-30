@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Domain;
-using Infrastructure;
+using HealthyHole.Domain;
 
 namespace HealthyHole.Dal
 {
     public static class DbInitializer
     {
-        public static void Initialize(HealthyHoleDBContext context)
+        public static void Initialize(HealthyHoleDbContext context)
         {
             context.Database.EnsureCreated();
             UserInjection(context);
@@ -18,14 +16,14 @@ namespace HealthyHole.Dal
         /// <summary>
         /// Добавляет немножко тестовых пользователей.
         /// </summary>
-        private static void UserInjection(HealthyHoleDBContext context)
+        private static void UserInjection(HealthyHoleDbContext context)
         {
             if (context.Employees.Any())
             {
                 return;
             }
             
-            var user = context.Employees.Add(new Employee()
+            context.Employees.Add(new Employee()
             {
                 Id = Guid.NewGuid(),
                 Position = Constants.Positions.Engineer,

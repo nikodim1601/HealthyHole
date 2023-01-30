@@ -1,22 +1,22 @@
 ﻿using System;
-using Application;
 using AutoMapper;
+using HealthyHole.Application;
 using HealthyHole.Application.Commands.CheckpointCommands;
-using HealthyHole.WebAPI.DTOModels;
+using HealthyHole.Application.Interfaces;
 
-namespace HealthyHole.WebAPI.Models
+namespace HealthyHole.WebAPI.DTOModels
 {
-    public class StartShiftDTO : IMapWith<StartShiftDTO>
+    public class StartShiftDto : IMapWith<StartShiftDto>
     {
         public Guid EmployeeId { get; set; }
         public DateTime StartTime { get; set; }
         
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<StartShiftDTO, StartShiftCommand>().ForMember(
-                    employeeDTO => employeeDTO.EmployeeId,
+            profile.CreateMap<StartShiftDto, StartShiftCommand>().ForMember(
+                    employeeDto => employeeDto.EmployeeId,
                     opt => opt.MapFrom(employee => employee.EmployeeId))
-                .ForMember(employeeDTO => employeeDTO.StartShift, opt => opt.MapFrom(employee => employee.StartTime));
+                .ForMember(employeeDto => employeeDto.StartShift, opt => opt.MapFrom(employee => employee.StartTime));
         }
 
     }

@@ -1,22 +1,19 @@
-﻿using Application;
-using HealthyHole.Application.Commands.Emploee;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthyHole.Application.Commands.EmployeeCommands;
 using HealthyHole.Application.Exceptions;
+using HealthyHole.Application.Interfaces;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace HealthyHole.Application.CommandHandlers
+namespace HealthyHole.Application.Commands.CommandHandlers.Employee
 {
     internal class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, Guid>
     {
-        private readonly IHealthyHoleDBContext _dbContext;
+        private readonly IHealthyHoleDbContext _dbContext;
 
-        public DeleteEmployeeCommandHandler(IHealthyHoleDBContext dbContext)
+        public DeleteEmployeeCommandHandler(IHealthyHoleDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }

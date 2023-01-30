@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Exceptions
+namespace HealthyHole.Domain.Exceptions
 {
     /// <summary>
     /// Ошибка возникает, если пользователь не начал смену, но пытается ее завершить.

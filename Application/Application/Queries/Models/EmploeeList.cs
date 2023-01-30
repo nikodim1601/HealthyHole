@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using HealthyHole.Application.DTO;
 
 namespace HealthyHole.Application.Queries.Models
 {
-    public class EmploeesList
+    public class EmployeeList
     {
-        public IList<EmploeeDTO> Emploees { get; }
+        public IList<EmployeeDto> Employees { get; }
 
-        public EmploeesList(IList<EmploeeDTO> emploees)
+        public EmployeeList(IList<EmployeeDto> employees)
         {
-            Emploees = emploees;
+            Employees = employees;
         }
     }
 }

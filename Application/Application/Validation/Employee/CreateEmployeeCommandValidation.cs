@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using HealthyHole.Application.Commands.Emploee;
+using HealthyHole.Application.Commands.EmployeeCommands;
 
 namespace HealthyHole.Application.Validation.Employee
 {
     /// <summary>
-    /// Определяет правило добавления сотрудника.
+    /// Определяет валидацию для команды добавления сотрудника.
     /// </summary>
     public class CreateEmployeeCommandRule : AbstractValidator<CreateEmployeeCommand>
     {

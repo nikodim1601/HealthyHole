@@ -1,11 +1,11 @@
 ﻿using System;
 using FluentValidation;
-using HealthyHole.Application.Commands.Emploee;
+using HealthyHole.Application.Commands.EmployeeCommands;
 
-namespace HealthyHole.Application.Rules.Employee
+namespace HealthyHole.Application.Validation.Employee
 {
     /// <summary>
-    /// Определяет правило удаления сотрудника.
+    /// Определяет валидацию для команды удаления сотрудника.
     /// </summary>
     public class DeleteEmployeeCommandRule : AbstractValidator<DeleteEmployeeCommand>
     {

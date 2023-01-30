@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,8 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using HealthyHole.Application;
-using HealthyHole.Service;
-using Application;
+using HealthyHole.Application.Interfaces;
+using HealthyHole.Dal;
 
 namespace WebAPI
 {
@@ -24,19 +26,26 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" }); });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+                // Настройка для документирования
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
 
-            // ������������ DI.
+            // Мои DI.
             services.AddAutoMapper(config =>
             {
                 config.AddProfile(new MappingProfiles(Assembly.GetExecutingAssembly()));
-                config.AddProfile(new MappingProfiles(typeof(IHealthyHoleDBContext).Assembly));
+                config.AddProfile(new MappingProfiles(typeof(IHealthyHoleDbContext).Assembly));
             });
             services.AddDal(Configuration);
             services.AddApplication(Configuration);
             services.AddControllers();
 
-            // ������ ������ ������������ ���������.
+            // Полный доступ настроен умышлено.
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -59,7 +68,7 @@ namespace WebAPI
             }
 
             app.UseRouting();
-
+            
             app.UseAuthorization();
 
             app.UseHttpsRedirection();

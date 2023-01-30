@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Application;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain;
 using HealthyHole.Application.Commands.CheckpointCommands;
-using HealthyHole.Application.Commands.Emploee;
+using HealthyHole.Application.DTO;
 using HealthyHole.Application.Exceptions;
-using HealthyHole.Application.Queries;
+using HealthyHole.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,10 +14,10 @@ namespace HealthyHole.Application.Commands.CommandHandlers.Checkpoint
 {
     public class EndShiftCommandHandler : IRequestHandler<EndShiftCommand>
     {
-        private readonly IHealthyHoleDBContext _dbContext;
-        private IMapper _mapper;
+        private readonly IHealthyHoleDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public EndShiftCommandHandler(IHealthyHoleDBContext dbContext, IMapper mapper)
+        public EndShiftCommandHandler(IHealthyHoleDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -32,10 +29,9 @@ namespace HealthyHole.Application.Commands.CommandHandlers.Checkpoint
                 cancellationToken: cancellationToken);
 
             // Тут есть баг, я не доразобрался с ним, по этому тут вот это. Изначально я получаю работника без "смен". 
-            // Но после выполнения следующего запроса он появляются лол.
             await _dbContext.Employees
-                .ProjectTo<EmploeeDTO>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(
-                    employeeDto => employeeDto.EmploeeId == request.EmployeeId, cancellationToken: cancellationToken);
+                .ProjectTo<EmployeeDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(
+                    employeeDto => employeeDto.EmployeeId == request.EmployeeId, cancellationToken: cancellationToken);
             
             if (employee == null)
             {

@@ -1,26 +1,26 @@
-﻿using Application;
-using Domain;
-using HealthyHole.Application.Commands.Emploee;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthyHole.Application.Commands.EmployeeCommands;
+using HealthyHole.Application.Interfaces;
+using HealthyHole.Domain;
+using MediatR;
 
-namespace HealthyHole.Application.CommandHandlers
+namespace HealthyHole.Application.Commands.CommandHandlers.Employee
 {
-    internal class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, Employee>
+    internal class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, Domain.Employee>
     {
-        private readonly IHealthyHoleDBContext _dbContext;
+        private readonly IHealthyHoleDbContext _dbContext;
 
-        public CreateEmployeeCommandHandler(IHealthyHoleDBContext dbContext)
+        public CreateEmployeeCommandHandler(IHealthyHoleDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<Employee> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task<Domain.Employee> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = new Employee
+            var employee = new Domain.Employee
             {
                 Id = request.EmployeeId,
                 FirstName = request.FirstName,

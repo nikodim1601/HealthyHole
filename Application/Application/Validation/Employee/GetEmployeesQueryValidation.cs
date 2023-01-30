@@ -4,7 +4,7 @@ using HealthyHole.Application.Queries;
 namespace HealthyHole.Application.Validation.Employee
 {
     /// <summary>
-    /// Определяет запрос получения сотруднков.
+    /// Определяет валидацию для запроса получения сотруднков.
     /// </summary>
     public class GetEmployeesQueryRule : AbstractValidator<GetEmployeesQuery>
     {

@@ -1,19 +1,19 @@
-﻿using Application;
-using AutoMapper;
-using Domain;
-using HealthyHole.Application.Commands.Emploee;
+﻿using AutoMapper;
+using HealthyHole.Application;
+using HealthyHole.Application.Interfaces;
 using HealthyHole.Application.Queries;
+using Constants = HealthyHole.Domain.Constants;
 
-namespace HealthyHole.WebAPI.Models
+namespace HealthyHole.WebAPI.DTOModels
 {
-    public class GetEmployeesDTO : IMapWith<GetEmployeesDTO>
+    public class GetEmployeesDto : IMapWith<GetEmployeesDto>
     {
         public Constants.Positions Position { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<GetEmployeesDTO, GetEmployeesQuery>().ForMember(
-                employeeDTO => employeeDTO.Positions,
+            profile.CreateMap<GetEmployeesDto, GetEmployeesQuery>().ForMember(
+                employeeDto => employeeDto.Positions,
                 opt => opt.MapFrom(employee => employee.Position));
         }
     }

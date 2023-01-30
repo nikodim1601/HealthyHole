@@ -1,27 +1,26 @@
 ﻿using AutoMapper;
-using HealthyHole.Application.Commands.Emploee;
 using HealthyHole.Application.Queries.Models;
-using HealthyHole.WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Domain;
+using HealthyHole.Application.Commands.EmployeeCommands;
 using HealthyHole.Application.Queries;
+using HealthyHole.Domain;
+using HealthyHole.WebAPI.DTOModels;
 
 namespace HealthyHole.WebAPI.Controllers
 {
+    /// <summary>
+    /// Отдел кадров.
+    /// </summary>
     [Route("api/[controller]")]
     public class PersonalDepartmentController : BaseController
     {
-        private readonly IMapper _mapper;
-
-        public PersonalDepartmentController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-
+        /// <summary>
+        /// Возвращает список всех работников.
+        /// </summary>
         [HttpGet]
-        public async Task<ActionResult<EmploeesList>> GetAll()
+        public async Task<ActionResult<EmployeeList>> GetAll()
         {
             try
             {
@@ -38,6 +37,9 @@ namespace HealthyHole.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Возвращает список всех должностей.
+        /// </summary>
         [HttpGet]
         [Route("GetPositions")]
         public async Task<ActionResult<string>> GetPositions()
@@ -54,12 +56,15 @@ namespace HealthyHole.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Возвращает список работников по выбранной должности.
+        /// </summary>
         [HttpGet("{Position}")]
-        public async Task<ActionResult<EmploeesList>> GetAllWith([FromRoute] GetEmployeesDTO getEmployeesDto)
+        public async Task<ActionResult<EmployeeList>> GetAllWith([FromRoute] GetEmployeesDto getEmployeesDto)
         {
             try
             {
-                var query = _mapper.Map<GetEmployeesQuery>(getEmployeesDto);
+                var query = Mapper.Map<GetEmployeesQuery>(getEmployeesDto);
                 var vm = await Mediator.Send(query);
                 return Ok(vm);
             }
@@ -70,12 +75,15 @@ namespace HealthyHole.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Создает работника.
+        /// </summary>
         [HttpPost]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreateEmploeeDTO createEmployeeDto)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateEmployeeDto createEmployeeDto)
         {
             try
             {
-                var command = _mapper.Map<CreateEmployeeCommand>(createEmployeeDto);
+                var command = Mapper.Map<CreateEmployeeCommand>(createEmployeeDto);
                 var employee = await Mediator.Send(command);
 
                 return Ok(employee);
@@ -87,12 +95,15 @@ namespace HealthyHole.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Изменяет работника.
+        /// </summary>
         [HttpPut]
-        public async Task<ActionResult<Guid>> Update([FromBody] UpdateEmploeeDTO updateEmployeeDto)
+        public async Task<ActionResult<Guid>> Update([FromBody] UpdateEmployeeDto updateEmployeeDto)
         {
             try
             {
-                var command = _mapper.Map<UpdateEmployeeCommand>(updateEmployeeDto);
+                var command = Mapper.Map<UpdateEmployeeCommand>(updateEmployeeDto);
 
                 var employee = await Mediator.Send(command);
 
@@ -105,6 +116,9 @@ namespace HealthyHole.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Удаляет работника.
+        /// </summary>
         [HttpDelete("{employeeId:guid}")]
         public async Task<ActionResult<Guid>> Delete(Guid employeeId)
         {

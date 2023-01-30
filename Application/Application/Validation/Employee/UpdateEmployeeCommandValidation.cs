@@ -1,12 +1,11 @@
 ﻿using System;
-using Domain;
 using FluentValidation;
-using HealthyHole.Application.Commands.Emploee;
+using HealthyHole.Application.Commands.EmployeeCommands;
 
 namespace HealthyHole.Application.Rules.Employee
 {
     /// <summary>
-    /// Определяет правило обновления информации о сотруднике
+    /// Определяет валидацию для команды обновления информации о сотруднике
     /// </summary>
     public class UpdateEmployeeCommandRule : AbstractValidator<UpdateEmployeeCommand>
     {

@@ -1,15 +1,11 @@
-﻿using Domain;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using HealthyHole.Domain;
+using Microsoft.EntityFrameworkCore;
 
-namespace Application
+namespace HealthyHole.Application.Interfaces
 {
-    public interface IHealthyHoleDBContext
+    public interface IHealthyHoleDbContext
     {
         DbSet<Employee> Employees { get; }
         DbSet<FactoryShift> FactoryChanges { get; }

@@ -1,28 +1,24 @@
-﻿using Application;
-using Domain;
-using HealthyHole.Application.Commands.Emploee;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthyHole.Application.Commands.EmployeeCommands;
 using HealthyHole.Application.Exceptions;
+using HealthyHole.Application.Interfaces;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace HealthyHole.Application.CommandHandlers
+namespace HealthyHole.Application.Commands.CommandHandlers.Employee
 {
-    internal class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, Employee>
+    internal class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, Domain.Employee>
     {
-        private readonly IHealthyHoleDBContext _dbContext;
+        private readonly IHealthyHoleDbContext _dbContext;
 
-        public UpdateEmployeeCommandHandler(IHealthyHoleDBContext dbContext)
+        public UpdateEmployeeCommandHandler(IHealthyHoleDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<Employee> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task<Domain.Employee> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee =
                 await _dbContext.Employees.FirstOrDefaultAsync(empl => empl.Id == request.EmployeeId,

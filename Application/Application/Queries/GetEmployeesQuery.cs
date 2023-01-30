@@ -1,16 +1,10 @@
 ﻿using HealthyHole.Application.Queries.Models;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain;
 
 namespace HealthyHole.Application.Queries
 {
-    public class GetEmployeesQuery : IRequest<EmploeesList>
+    public class GetEmployeesQuery : IRequest<EmployeeList>
     {
-        public Constants.Positions? Positions { get; set; }
+        public Domain.Constants.Positions? Positions { get; set; }
     }
 }

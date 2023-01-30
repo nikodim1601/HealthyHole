@@ -1,22 +1,20 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
+using HealthyHole.Application.Interfaces;
 
-namespace Application
+namespace HealthyHole.Application
 {
     public class MappingProfiles : Profile
     {
-        public MappingProfiles(Assembly assembly) => ApplyMappingsFromAssebly(assembly);
+        public MappingProfiles(Assembly assembly) => ApplyMappingsFromAssembly(assembly);
 
 
         /// <summary>
         /// Проверяет сборку, ищет типы, реализующие <see cref="IMapWith{T}" /> и применяет маппинг./>.
         /// </summary>
-        private void ApplyMappingsFromAssebly(Assembly assembly)
+        private void ApplyMappingsFromAssembly(Assembly assembly)
         {
             var types = assembly.GetExportedTypes()
                 .Where(type => type.GetInterfaces()

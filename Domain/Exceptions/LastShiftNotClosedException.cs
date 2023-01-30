@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Exceptions
+namespace HealthyHole.Domain.Exceptions
 {
     /// <summary>
     /// Ошибка возникает если работник не закрыл предыдущую смену.

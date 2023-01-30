@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Exceptions;
+using HealthyHole.Domain.Exceptions;
 
-namespace Domain
+namespace HealthyHole.Domain
 {
     /// <summary>
     /// Представляет класс "Сотрудника".
@@ -61,6 +59,10 @@ namespace Domain
             _position = positions;
         }
 
+        /// <summary>
+        /// Начинает смену.
+        /// </summary>
+        /// <exception cref="LastShiftNotClosedException">Ошибка возникает если работник не закрыл предыдущую смену.</exception>
         public void StartShift(DateTime startTime)
         {
             var yesterday = startTime.Date.AddDays(-1);
@@ -93,6 +95,10 @@ namespace Domain
             }
         }
 
+        /// <summary>
+        /// Завершает смену.
+        /// </summary>
+        /// <exception cref="ShiftNotStartedException">Ошибка возникает, если пользователь не начал смену, но пытается ее завершить. </exception>
         public void FinishShift(DateTime finishTime)
         {
             var todayShift = GetShiftByDay(finishTime.Date);

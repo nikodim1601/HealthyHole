@@ -1,49 +1,47 @@
-﻿using Application;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain;
-using HealthyHole.Application.Commands.Emploee;
 using HealthyHole.Application.Queries.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthyHole.Application.DTO;
+using HealthyHole.Application.Interfaces;
 
 namespace HealthyHole.Application.Queries.QueryHandlers
 {
-    internal class GetEmploeesQueryHandler : IRequestHandler<GetEmployeesQuery, EmploeesList>
+    internal class GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, EmployeeList>
     {
-        private readonly IHealthyHoleDBContext _dbContext;
+        private readonly IHealthyHoleDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetEmploeesQueryHandler(IHealthyHoleDBContext dbContext, IMapper mapper)
+        public GetEmployeesQueryHandler(IHealthyHoleDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<EmploeesList> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
+        public async Task<EmployeeList> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
         {
-            List<EmploeeDTO> employees;
+            List<EmployeeDto> employees;
 
             if (request.Positions is not null)
             {
                 employees = await _dbContext.Employees.Where(employee => employee.Position == request.Positions)
-                    .ProjectTo<EmploeeDTO>(_mapper.ConfigurationProvider)
+                    .ProjectTo<EmployeeDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken: cancellationToken);
             }
             else
             {
                 employees = await _dbContext.Employees
-                    .ProjectTo<EmploeeDTO>(_mapper.ConfigurationProvider)
+                    .ProjectTo<EmployeeDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken: cancellationToken);
             }
 
-            return new EmploeesList(employees);
+            return new EmployeeList(employees);
         }
     }
 }

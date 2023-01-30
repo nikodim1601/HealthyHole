@@ -1,23 +1,22 @@
-﻿using Application;
-using Infrastructure;
+﻿using HealthyHole.Application;
+using HealthyHole.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HealthyHole.Service
+namespace HealthyHole.Dal
 {
+    /// <summary>
+    /// Регестрируем необходимые сервисы DAL слоя.
+    /// </summary>
     public static class DependencyInjection
     {
         public static IServiceCollection AddDal(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration["DbConnection"];
 
-            services.AddDbContext<HealthyHoleDBContext>(options => { options.UseSqlite(connectionString); });
-            services.AddScoped<IHealthyHoleDBContext>(provider => provider.GetService<HealthyHoleDBContext>());
+            services.AddDbContext<HealthyHoleDbContext>(options => { options.UseSqlite(connectionString); });
+            services.AddScoped<IHealthyHoleDbContext>(provider => provider.GetService<HealthyHoleDbContext>());
 
             return services;
         }

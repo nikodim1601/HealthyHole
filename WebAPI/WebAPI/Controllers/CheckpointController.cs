@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using HealthyHole.Application.Commands.CheckpointCommands;
 using HealthyHole.WebAPI.DTOModels;
-using HealthyHole.WebAPI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyHole.WebAPI.Controllers
 {
+    /// <summary>
+    /// КППшка.
+    /// </summary>
     [Route("api/[controller]")]
     public class CheckpointController : BaseController
     {
-        private readonly IMapper _mapper;
-    
-        public CheckpointController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-        
+        /// <summary>
+        /// Начинает смену.
+        /// </summary>
         [HttpPost]
         [Route("StartShift")]
-        public async Task<ActionResult<Unit>> StartShift([FromBody] StartShiftDTO startShiftDto)
+        public async Task<ActionResult<Unit>> StartShift([FromBody] StartShiftDto startShiftDto)
         {
             try
             {
-                var command = _mapper.Map<StartShiftCommand>(startShiftDto);
+                var command = Mapper.Map<StartShiftCommand>(startShiftDto);
                 await Mediator.Send(command);
                 return Ok();
             }
@@ -36,13 +33,16 @@ namespace HealthyHole.WebAPI.Controllers
             }
         }
         
+        /// <summary>
+        /// Завершает смену.
+        /// </summary>
         [HttpPost]
         [Route("EndShift")]
-        public async Task<ActionResult<Unit>> EndShift([FromBody] EndShiftDTO endShiftDto )
+        public async Task<ActionResult<Unit>> EndShift([FromBody] EndShiftDto endShiftDto )
         {
             try
             {
-                var command = _mapper.Map<EndShiftCommand>(endShiftDto);
+                var command = Mapper.Map<EndShiftCommand>(endShiftDto);
                 await Mediator.Send(command);
                 return Ok();
             }

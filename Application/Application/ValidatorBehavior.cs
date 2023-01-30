@@ -8,6 +8,9 @@ using MediatR;
 
 namespace HealthyHole.Application
 {
+    /// <summary>
+    /// Выполняет валидацию команд и запросов. 
+    /// </summary>
     public class ValidatorBehavior<TRequest, TResponse>
         : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
@@ -37,7 +40,7 @@ namespace HealthyHole.Application
 
         private string GetErrorMessage(List<ValidationFailure> failures)
         {
-            var message = CONSTANTS.VALIDATOR_EXEPTION_MESSAGE;
+            var message = Constants.VALIDATOR_EXEPTION_MESSAGE;
 
             foreach (var validationFailure in failures)
             {
